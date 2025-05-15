@@ -7,20 +7,6 @@ st.set_page_config(page_title="Planificador de Horarios", layout="wide")
 
 # Datos reales por supervisor
 supervisores_data = {
-    "KARLA HUERTO": {
-        "asesores": [],
-        "modulos": [
-            "OPEN PIURA",
-            "PLAZA VEA PIURA"
-        ]
-    },
-    "KATTY CASTRO": {
-        "asesores": [],
-        "modulos": [
-            "MALL AVENTURA CHICLAYO",
-            "OPEN CHICLAYO"
-        ]
-    },
     "ELIZABETH CARLIN": {
         "asesores": [
             "COBEÑAS LUPACA ELVIS PERCY",
@@ -56,13 +42,7 @@ supervisores_data = {
             "REAL PLAZA CENTRO CIVICO"
         ]
     },
-    "MARWIN SARMIENTO": {
-        "asesores": [],
-        "modulos": [
-            "MALL PLAZA TRUJILLO",
-            "OPEN TRUJILLO"
-        ]
-    },
+    
     "DIEGO PALACIOS": {
         "asesores": [
             "ARTEAGA TRUJILLO ARACELI MARIA",
