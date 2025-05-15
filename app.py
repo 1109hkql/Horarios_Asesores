@@ -5,44 +5,17 @@ from datetime import date
 
 st.set_page_config(page_title="Planificador de Horarios", layout="wide")
 
-# Datos reales por supervisor
+# Mapeo de DNI a Supervisor
+dni_to_supervisor = {
+    "12345678": "IMALAY USCATEGUI",
+    "23456789": "HECSAN GUANIQUE",
+    "34567890": "EDSON VEGA",
+    "45678901": "ELIZABETH CARLIN",
+    "56789012": "DIEGO PALACIOS"
+}
+
+# Diccionario completo de supervisores
 supervisores_data = {
-    "ELIZABETH CARLIN": {
-        "asesores": [
-            "COBEÑAS LUPACA ELVIS PERCY",
-            "CONDORI LLACCHUA JOSE PABLO",
-            "COZ AYALA MILLER",
-            "CUBAS TORIBIO MARCO ANTONIO",
-            "GUTIERREZ CORDOVA JEAN PIERRE",
-            "JHON ROLF REYES BOCANEGRA",
-            "JOSE LUIS PAZ ACHO",
-            "MARCOS DANIEL CAPUSARI NOLORBE",
-            "ORELLANA PAREDES MIGUEL ANGEL",
-            "PATIÑO IGREDA ALBERTO",
-            "PATRICIA ROXANA PINTO ARMAS",
-            "QUISPE UTUS JONATAN RUDECINDO",
-            "SANCHEZ ESTEVES REYNALDO LEOPOLDO",
-            "ZEGARRA LATORRE PABLO JOSE",
-            "VALERIA GUERRA CHONATE",
-            "RONAL PEÑA ARICA",
-            "JOE MARIO CALDERON ALVARADO ",
-            "MARCELINO VENEGAS  ZAVALETA",
-            "MARIELA BARBARA FLORES PALOMINO",
-            "JOHANA GUTIÉRREZ RIVERO",
-            "JUAN CARLOS QUIÑONES ARONES"
-        ],
-        "modulos": [
-            "JOCKEY PLAZA 1",
-            "PLAZA NORTE 1",
-            "MEGAPLAZA",
-            "PLAZA NORTE 2",
-            "REAL PLAZA PRO",
-            "PLAZA VEA UNIVERSITARIA",
-            "METRO BELAUNDE",
-            "REAL PLAZA CENTRO CIVICO"
-        ]
-    },
-    
     "DIEGO PALACIOS": {
         "asesores": [
             "ARTEAGA TRUJILLO ARACELI MARIA",
@@ -58,8 +31,8 @@ supervisores_data = {
             "PEREZ RAMOS PIERO ALEXANDER",
             "SOTO AVILA DIEGO ARMANDO PAOLO",
             "RICARDO RAMOS MOLINA",
-            "JONATHAN CÉSAR EDUARDO LANDA MELGAR ",
-            "ROBERTO EUSEBIO GASPAR PAZ ",
+            "JONATHAN CÉSAR EDUARDO LANDA MELGAR",
+            "ROBERTO EUSEBIO GASPAR PAZ",
             "VICTOR MARTIN RUCANA MANRIQUE",
             "FIVIANA ERIKA QUISPEALAYA CARHUACOSMA",
             "MANUEL RICARDO ROMERO MALVACEDA",
@@ -81,7 +54,7 @@ supervisores_data = {
             "ANDERSON MOISES CAPCHA MARCOS",
             "CANDACHO ANZUALDO CHRISTIAN EDUARDO",
             "DELZO HURTADO LUIS JUNIOR",
-            "DIEGO RAMÓN VASQUEZ FIGUEROA ",
+            "DIEGO RAMÓN VASQUEZ FIGUEROA",
             "EDGAR IVAN VALENCIA SAAVEDRA",
             "GUTIERREZ HUANIN LUIGGI ERICK",
             "LUIS JERONIMO AGUILAR",
@@ -96,7 +69,7 @@ supervisores_data = {
             "EDWIN JUNIOR LOPEZ HUAMAN",
             "ADRIANA JHAZMIN HUERTA GAONA",
             "MANUEL ALEJANDRO ÁLVAREZ MARTOS",
-            "MILAGRITOS CARRERA LOPEZ "
+            "MILAGRITOS CARRERA LOPEZ"
         ],
         "modulos": [
             "MALL DEL SUR",
@@ -108,21 +81,92 @@ supervisores_data = {
             "MALL AVENTURA SJL"
         ]
     },
+    "ELIZABETH CARLIN": {
+        "asesores": [
+            "COBEÑAS LUPACA ELVIS PERCY",
+            "CONDORI LLACCHUA JOSE PABLO",
+            "COZ AYALA MILLER",
+            "CUBAS TORIBIO MARCO ANTONIO",
+            "GUTIERREZ CORDOVA JEAN PIERRE",
+            "JHON ROLF REYES BOCANEGRA",
+            "JOSE LUIS PAZ ACHO",
+            "MARCOS DANIEL CAPUSARI NOLORBE",
+            "ORELLANA PAREDES MIGUEL ANGEL",
+            "PATIÑO IGREDA ALBERTO",
+            "PATRICIA ROXANA PINTO ARMAS",
+            "QUISPE UTUS JONATAN RUDECINDO",
+            "SANCHEZ ESTEVES REYNALDO LEOPOLDO",
+            "ZEGARRA LATORRE PABLO JOSE",
+            "VALERIA GUERRA CHONATE",
+            "RONAL PEÑA ARICA",
+            "JOE MARIO CALDERON ALVARADO",
+            "MARCELINO VENEGAS  ZAVALETA",
+            "MARIELA BARBARA FLORES PALOMINO",
+            "JOHANA GUTIÉRREZ RIVERO",
+            "JUAN CARLOS QUIÑONES ARONES"
+        ],
+        "modulos": [
+            "JOCKEY PLAZA 1",
+            "PLAZA NORTE 1",
+            "MEGAPLAZA",
+            "PLAZA NORTE 2",
+            "REAL PLAZA PRO",
+            "PLAZA VEA UNIVERSITARIA",
+            "METRO BELAUNDE",
+            "REAL PLAZA CENTRO CIVICO"
+        ]
+    },
+    "HECSAN GUANIQUE": {
+        "asesores": [
+            "CASTILLO CASTILLO CRISTOFER YANPIER",
+            "CHAVEZ CUBAS LESLEY LUZFELINA",
+            "CISNEROS GRADOS DIEGO ALONSO",
+            "DIEGO VICTOR LIZARZABURU FARFAN",
+            "FRINI VIVIANA VILLEGAS RONDOY",
+            "HINOSTROZA GARCIA DANIEL AUGUSTO",
+            "JEFFREY ALEXANDER MARTINEZ VILCHEZ",
+            "PRIETO MOREYRA RUDY NOEMI",
+            "RAMIREZ NUREÑA LUIS HUGO",
+            "RAQUEL DURAN ALALUNA",
+            "REYES BANDES MARIA DE LOS ANGELES",
+            "SEBASTIAN ALONSO ORELLANA ORTIZ",
+            "VIERA ZAPATA JOSE RODOLFO",
+            "GONZALES ORELLANA CRISTH FIORELLA",
+            "VANESSA GLENDA ROSAS TORRES",
+            "RUBEN DARIO FLORES IMAN",
+            "ROCIO DEL PILAR REAÑO SIQUIHUA",
+            "JUAN CARLOS PALOMINO BOCANEGRA",
+            "NYRLA BEATRIZ MALDONADO CARREÑO",
+            "ELIAS PERALES  ROJAS",
+            "HAROLD STEWART FLORIAN TORRES",
+            "ALEXIS AARÓN LINO PEÑA"
+        ],
+        "modulos": [
+            "PLAZA VEA RISSO",
+            "PLAZA LIMA SUR",
+            "OPEN ANGAMOS",
+            "PLAZA VEA EL CORTIJO",
+            "WONG 2 DE MAYO",
+            "WONG OVALO GUTIERREZ",
+            "PLAZA VEA HIGUERETA",
+            "REAL PLAZA PRIMAVERA"
+        ]
+    },
     "IMALAY USCATEGUI": {
         "asesores": [
             "AGÜERO FON LUIS HUMBERTO",
             "AHUANARI TUÑOQUE JULIO CESAR",
-            "ANTONELLA DAYANA ORTIZ DOMINGUEZ ",
+            "ANTONELLA DAYANA ORTIZ DOMINGUEZ",
             "CORAL SILVA WILTER",
             "CRISTIAN CAPARACHIN CAHUANA",
-            "GABRIELA GALINDO VIZCARRA ",
+            "GABRIELA GALINDO VIZCARRA",
             "JOHN JAIME CHUNQUI SILVA",
-            "KARIN GEOVANA TAIPE CRUZ ",
-            "MAYURI ALEGRÍA CHOQUE ",
+            "KARIN GEOVANA TAIPE CRUZ",
+            "MAYURI ALEGRÍA CHOQUE",
             "ORDOÑEZ QUISPE WILDER",
             "PAJARES PEREZ CLEVER",
             "VILLAVICENCIO CHOLAN JUAN MARCO",
-            "WALDIR HENRY FERNANDEZ MANDUJANO ",
+            "WALDIR HENRY FERNANDEZ MANDUJANO",
             "YAHAIRA POLLET AGUIRRE MUÑOZ",
             "DAVID FERNANDO ROJAS MENDOZA",
             "LESLY SALOME CORDOVA CHIRINOS",
@@ -141,86 +185,78 @@ supervisores_data = {
             "WONG GARDENIAS"
         ]
     },
-    "HECSAN GUANIQUE": {
-        "asesores": [
-            "CASTILLO CASTILLO CRISTOFER YANPIER",
-            "CHAVEZ CUBAS LESLEY LUZFELINA",
-            "CISNEROS GRADOS DIEGO ALONSO",
-            "DIEGO VICTOR LIZARZABURU FARFAN",
-            "FRINI VIVIANA VILLEGAS RONDOY ",
-            "HINOSTROZA GARCIA DANIEL AUGUSTO",
-            "JEFFREY ALEXANDER MARTINEZ VILCHEZ",
-            "PRIETO MOREYRA RUDY NOEMI",
-            "RAMIREZ NUREÑA LUIS HUGO",
-            "RAQUEL DURAN ALALUNA",
-            "REYES BANDES MARIA DE LOS ANGELES",
-            "SEBASTIAN ALONSO ORELLANA ORTIZ ",
-            "VIERA ZAPATA JOSE RODOLFO",
-            "GONZALES ORELLANA CRISTH FIORELLA",
-            "VANESSA GLENDA ROSAS TORRES",
-            "RUBEN DARIO FLORES IMAN",
-            "ROCIO DEL PILAR REAÑO SIQUIHUA",
-            "JUAN CARLOS PALOMINO BOCANEGRA",
-            "NYRLA BEATRIZ MALDONADO CARREÑO ",
-            "ELIAS PERALES  ROJAS",
-            "HAROLD STEWART FLORIAN TORRES",
-            "ALEXIS AARÓN LINO PEÑA"
-        ],
+    "KARLA HUERTO": {
+        "asesores": [],
         "modulos": [
-            "PLAZA VEA RISSO",
-            "PLAZA LIMA SUR",
-            "OPEN ANGAMOS",
-            "PLAZA VEA EL CORTIJO",
-            "WONG 2 DE MAYO",
-            "WONG OVALO GUTIERREZ",
-            "PLAZA VEA HIGUERETA",
-            "REAL PLAZA PRIMAVERA"
+            "OPEN PIURA",
+            "PLAZA VEA PIURA"
+        ]
+    },
+    "KATTY CASTRO": {
+        "asesores": [],
+        "modulos": [
+            "MALL AVENTURA CHICLAYO",
+            "OPEN CHICLAYO"
+        ]
+    },
+    "MARWIN SARMIENTO": {
+        "asesores": [],
+        "modulos": [
+            "MALL PLAZA TRUJILLO",
+            "OPEN TRUJILLO"
         ]
     }
 }
 
-turnos = ["AM", "PM"]
-dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+# Login por DNI
+st.title("🔐 Ingreso al Planificador de Horarios")
+dni_input = st.text_input("Ingrese su DNI:", max_chars=8)
 
-st.title("📅 Planificador de Horarios Semanales")
-
-with st.form("planificador_form"):
-    fecha = st.date_input("Fecha de planificación", date.today())
-    supervisor = st.selectbox("Supervisor", list(supervisores_data.keys()))
-
+if dni_input in dni_to_supervisor:
+    supervisor = dni_to_supervisor[dni_input]
+    st.success(f"✅ Bienvenido, {supervisor}")
     asesores = supervisores_data[supervisor]["asesores"]
     modulos = supervisores_data[supervisor]["modulos"]
 
-    planning = []
-    for modulo in modulos:
-        for turno in turnos:
-            st.markdown(f"### {modulo} - {turno}")
-            cols = st.columns(len(dias))
-            fila = {}
-            for i, dia in enumerate(dias):
-                fila[dia] = cols[i].selectbox(
-                    f"{dia} - {modulo}-{turno}", 
-                    asesores, 
-                    key=f"{modulo}_{turno}_{dia}"
-                )
-            planning.append({"Módulo": modulo, "Turno": turno, **fila})
+    turnos = ["AM", "PM"]
+    dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
-    submitted = st.form_submit_button("Guardar planificación")
-    if submitted:
-        rows = []
-        for fila in planning:
-            modulo = fila["Módulo"]
-            turno = fila["Turno"]
-            for dia in dias:
-                rows.append({
-                    "Fecha": fecha,
-                    "Supervisor": supervisor,
-                    "Módulo": modulo,
-                    "Turno": turno,
-                    "Día": dia,
-                    "Asesor": fila[dia]
-                })
-        df = pd.DataFrame(rows)
-        df.to_excel("planificacion_resultado.xlsx", index=False)
-        st.success("✅ Planificación guardada correctamente.")
-        st.dataframe(df)
+    with st.form("planificador_form"):
+        fecha = st.date_input("Fecha de planificación", date.today())
+
+        planning = []
+        for modulo in modulos:
+            for turno in turnos:
+                st.markdown(f"### {modulo} - {turno}")
+                cols = st.columns(len(dias))
+                fila = {}
+                for i, dia in enumerate(dias):
+                    fila[dia] = cols[i].selectbox(
+                        f"{dia} - {modulo}-{turno}", 
+                        asesores, 
+                        key=f"{modulo}_{turno}_{dia}"
+                    )
+                planning.append({"Módulo": modulo, "Turno": turno, **fila})
+
+        submitted = st.form_submit_button("Guardar planificación")
+        if submitted:
+            rows = []
+            for fila in planning:
+                modulo = fila["Módulo"]
+                turno = fila["Turno"]
+                for dia in dias:
+                    rows.append({
+                        "Fecha": fecha,
+                        "Supervisor": supervisor,
+                        "Módulo": modulo,
+                        "Turno": turno,
+                        "Día": dia,
+                        "Asesor": fila[dia]
+                    })
+            df = pd.DataFrame(rows)
+            df.to_excel("planificacion_resultado.xlsx", index=False)
+            st.success("✅ Planificación guardada correctamente.")
+            st.dataframe(df)
+else:
+    if dni_input:
+        st.error("❌ DNI no válido. Comuníquese con administración.")
